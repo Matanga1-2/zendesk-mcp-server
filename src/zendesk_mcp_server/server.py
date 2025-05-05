@@ -217,6 +217,14 @@ async def handle_call_tool(
                 text=f"Comment created successfully: {result}"
             )]
 
+        elif name == "get_ticket_related_jira_issues":
+            jira_issue_ids = zendesk_client.get_ticket_related_jira_issues(
+                arguments["ticket_id"])
+            return [types.TextContent(
+                type="text",
+                text=json.dumps(jira_issue_ids)
+            )]
+
         else:
             raise ValueError(f"Unknown tool: {name}")
 
